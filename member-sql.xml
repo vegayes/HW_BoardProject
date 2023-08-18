@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>member-sql</comment>
+
+	<entry key = "selectMem">
+	SELECT MEMBER_ID, MEMBER_NM, MEMBER_GENDER, ENROLL_DT
+	FROM "MEMBER" 
+	WHERE MEMBER_ID = ?
+	</entry>
+
+	<entry key = "updateMem">
+	UPDATE "MEMBER" SET 
+	MEMBER_NM  = ?, MEMBER_GENDER =?
+	WHERE MEMBER_ID = ?
+	</entry>
+
+	<entry key = "selectMembers">
+	SELECT MEMBER_ID , MEMBER_NM , MEMBER_GENDER 
+	FROM "MEMBER" 
+	</entry>
+
+	<entry key = "updatePw">
+	SELECT MEMBER_ID , MEMBER_Pw
+	FROM "MEMBER"
+	WHERE MEMBER_ID = ? AND MEMBER_PW = ?
+	</entry>
+
+
+
+</properties>

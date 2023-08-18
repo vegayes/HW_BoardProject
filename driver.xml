@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+		<comment>driver</comment>
+
+		<entry key = "driver">oracle.jdbc.driver.OracleDriver</entry>
+		<!-- JAVA에서 key 부르면 value 얻음 -->
+
+		<entry key ="url">jdbc:oracle:thin:@localhost:1521:XE</entry>
+		
+		<entry key = "user">board_project</entry>
+		<entry key = "pw">board1234</entry>
+
+</properties>
