@@ -8,7 +8,8 @@ import edu.kh.jdbc.main.model.service.MainService;
 import edu.kh.jdbc.member.view.MemberView;
 
 
-// 1) main --> 로그인 VS 로그인 X ( 로그인 여부는 Session에서 저장됨 ) 
+// 1) main --> 로그인 VS 로그인 X ( 로그인 여부는 Session에서 저장됨 )   
+// +) 탈퇴 여부에 따라..
 
 
 public class MainView {
@@ -122,6 +123,8 @@ public class MainView {
 			System.out.println("\n***** 로그인 중 예외 발생 *****\n");
 			e.printStackTrace();
 		}
+	
+		
 		
 	}
 	

@@ -46,7 +46,7 @@ public class MainDAO {
 	public Member login(Connection con, String logId, String logPw) throws Exception {
 
 		// 1. 결과 저장용 변수 선언
-		Member mem = new Member();
+		Member mem = null;
 		
 		try {
 			
@@ -79,6 +79,7 @@ public class MainDAO {
 				
 				mem.setMemberNo(memberNo);
 				mem.setMemberId(logId);
+				mem.setMemberPw(logPw);
 				mem.setMemberNM(memberName);
 				mem.setMemberGender(memberGender);
 				mem.setEnrollDt(enrollDate);

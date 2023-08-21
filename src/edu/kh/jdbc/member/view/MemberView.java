@@ -1,5 +1,6 @@
 package edu.kh.jdbc.member.view;
 
+import java.nio.file.spi.FileSystemProvider;
 import java.util.List;
 import java.util.Scanner;
 
@@ -45,9 +46,11 @@ public class MemberView {
 				case 2: selectMembers(); break;
 				case 3: updateMem(); break;
 				case 4: updatePw();break;
-				case 5: break;
+				case 5: secession();break;
 				case 9: System.out.println("↩ 이전 메뉴로 돌아가기");break;
-				case 0 :  break;		
+				case 0 : System.out.println("\n** 프로그램이 종료 되었습니다.** \n");
+		     		System.exit(0); // JVM 강제 종료 구문
+		     		break;				
 				default: System.out.println("\n***** 메뉴에 있는 숫자를 입력해주세요! *****"); break;
 
 				}
@@ -58,12 +61,14 @@ public class MemberView {
 			}
 			
 		
-		}while(memNum != 0  && memNum != 9);
+		}while(memNum != 9);
 
 	}
 	
 
-	
+
+
+
 
 
 	// 주 기능
@@ -72,11 +77,26 @@ public class MemberView {
 	 */
 	private void selectMem()throws Exception{
 		
+		// Session에 있는 정보만 사용해도 괜찮음.
+	/*
 		System.out.println("\n===== 나의 정보 조회 =====\n");
 
 		Member mem = service.selectMem(Session.loginMember);
 
 		printOne(mem);
+		*/
+		
+		System.out.println("회원 번호 : " +  Session.loginMember.getMemberNo());
+		System.out.println("아이디 : " +  Session.loginMember.getMemberId());
+		System.out.println("회원 이름 : " +  Session.loginMember.getMemberNM());
+		
+		if(Session.loginMember.getMemberGender().equals('M')) {
+			System.out.println("성별 : 남");
+		}else {
+			System.out.println("성별 : 여");
+		}
+		
+		System.out.println("가입일 : " + Session.loginMember.getEnrollDt());
 		
 	}
 	
@@ -93,6 +113,12 @@ public class MemberView {
 		
 		List<Member> memList = service.selectMembers();
 		
+		if(memList.isEmpty()) {
+			
+			System.out.println("\n =======조회 결과가 없습니다. ======\n");
+		}else {
+		
+		
 		System.out.println("아이디  |     이름      |     성별 ");
 		
 		for(Member key : memList) {
@@ -102,7 +128,12 @@ public class MemberView {
 			System.out.print("\t"+key.getMemberGender() +"\t\n") ;
 			
 			
-		}	
+			}
+		}
+		
+		
+		
+		
 		
 		/*
 		System.out.println("아이디  |    이름    |  성별 ");
@@ -136,11 +167,20 @@ public class MemberView {
 
 		int updateMem = service.updateMem(Session.loginMember, reName, reGender);
 		
+		
+		
+		
 		if(updateMem > 0) {
 			System.out.println("수정이 완료 되었습니다.");
 			// Q4) 수정된 값 표시
+			
+			//DB와  JAVA 프로그램 데이터 동기화 필요 
+			Session.loginMember.setMemberNM(reName);
+			Session.loginMember.setMemberGender(reGender);
+			
+			
 		}else {
-			System.out.println("수정이 진행되지 않았습니다.");
+			System.out.println("수정 실패");
 		}
 	}
 
@@ -168,18 +208,72 @@ public class MemberView {
 			System.out.print("새 비밀번호를 확인을 하기 위해 입력해주세요 >>");
 			String updatePw2 = sc.next();
 			
-			
-			
-			
-			
+			if(updatePw.equals(updatePw2)) {
+				
+				int result = service.updatePw2(Session.loginMember, updatePw);
+				
+				if(result > 0 ) {
+					System.out.println("비밀번호 수정이 완료되었습니다.");
+				}else {
+					System.out.println("비밀번호 수정을 실패하였습니다.");
+				}
+				
+			}
+
 			
 		}
-		
-		
-		
+
 	}
 	
 	
+
+
+	/**  5) 회원 탈퇴
+	 * @return
+	 * @throws Exception
+	 */
+	private void secession() throws Exception{
+
+		// 비밀번호 랜덤 
+		
+		int secStr = ((int)(Math.random()*100000)+1);
+		
+		System.out.println("\n===== 회원 탈퇴 =====\n");
+		
+		System.out.print("현재 비밀번호 :");
+		String currentPw = sc.next();
+
+		System.out.printf("보안문자 입력 [%d] : ",secStr);
+		int inSecStr = sc.nextInt();
+		
+		if(Session.loginMember.getMemberPw().equals(currentPw) && secStr ==inSecStr) {
+
+			
+			System.out.print("탈퇴를 진행하시겠습니까? (Y/N)>> ");
+			char check = sc.next().toUpperCase().charAt(0);
+			
+			if(check == 'Y') {
+				
+				int secession = service.secession(Session.loginMember);
+				
+				if(secession >0) {
+					System.out.println("탈퇴를 진행하였습니다.");
+				}else {
+					System.out.println("탈퇴에 실패하여습니다.");
+				}
+				
+				
+			}else {
+				System.out.println("탈퇴를 취소하였습니다. "
+						+ Session.loginMember.getMemberId()+"님, 환영합니다.");
+			}
+			
+		}
+		
+	
+
+	}
+
 	
 	
 	

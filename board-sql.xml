@@ -2,4 +2,59 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 <comment>board-sql</comment>
+
+
+	<entry key = "selectBoard">
+		SELECT BOARD_NO, BOARD_TITLE, CREATE_DT, READ_COUNT
+		FROM "BOARD"
+		WHERE DELETE_FL ='N'
+	</entry>
+
+	<entry key = "writeBoard">
+		INSERT INTO "BOARD"
+		VALUES(SEQ_BOARD_NO.NEXTVAL, ?, ?,DEFAULT, DEFAULT, DEFAULT, ?)
+	</entry>
+
+	<entry key = "searchBoard">
+		SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT, CREATE_DT, READ_COUNT
+		FROM BOARD
+		WHERE BOARD_TITLE LIKE ?
+	</entry>
+
+	<entry key = "searchWriter">
+		SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT, CREATE_DT, READ_COUNT
+		FROM BOARD
+		LEFT JOIN MEMBER USING(MEMBER_NO)
+		WHERE MEMBER_NM LIKE ?
+	</entry>
+
+	<entry key = "searchContent">
+		SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT, CREATE_DT, READ_COUNT
+		FROM BOARD
+		WHERE BOARD_CONTENT LIKE ?
+	</entry>
+
+	<entry key = "detailContent">
+		SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT, CREATE_DT, READ_COUNT
+		FROM BOARD
+		WHERE BOARD_NO = ?
+	</entry>
+
+	<entry key = "checkNumber">
+		SELECT BOARD_NO , MEMBER_NO  
+		FROM BOARD 
+		WHERE BOARD_NO = ?
+	</entry>
+
+	<entry key = "deleteBoard">	
+		UPDATE BOARD SET DELETE_FL = ?
+	    WHERE BOARD_NO = ?
+	</entry>
+
+
+
+
+
+
+
 </properties>

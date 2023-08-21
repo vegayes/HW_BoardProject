@@ -2,4 +2,41 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 <comment>comment-sql</comment>
+
+	<entry key = "showComment">
+	SELECT COMMENT_NO, COMMENT_CONTENT , MEMBER_NM
+	FROM "COMMENT"
+	LEFT JOIN "MEMBER" USING(MEMBER_NO)
+	WHERE BOARD_NO = ? AND DELETE_FL ='N'
+	</entry>
+
+
+	<entry key = "addComment" >
+		INSERT INTO "COMMENT"
+		VALUES(SEQ_COMMENT_NO.NEXTVAL, ?, DEFAULT, DEFAULT,
+		?, ?)
+	</entry>
+
+	
+	<entry key = "checkNo">
+		SELECT MEMBER_NO 
+		FROM "COMMENT" 
+		WHERE BOARD_NO = ? AND COMMENT_NO = ?
+	</entry>
+
+
+	<entry key = "updateComment">
+		UPDATE "COMMENT" 
+		SET COMMENT_CONTENT = ? ,  CREATE_DT = SYSDATE
+		WHERE COMMENT_NO = ?
+	</entry>
+
+
+	<entry key = "deleteComment">
+	UPDATE "COMMENT" SET DELETE_FL = 'Y'
+	WHERE COMMENT_NO =?	AND BOARD_NO = ?
+	</entry>
+
+
+
 </properties>

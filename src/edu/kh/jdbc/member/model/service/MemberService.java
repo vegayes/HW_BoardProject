@@ -105,6 +105,37 @@ public class MemberService {
 	}
 
 
+
+	public int updatePw2(Member loginMember, String updatePw) throws Exception {
+		Connection con = getConnection();
+		
+		int result = dao.updatePw2(con, loginMember.getMemberId(), updatePw);
+		
+		if(result != 0 ) commit(con);
+		else 			 rollback(con);
+		
+		
+		close(con);	
+		
+		return result;
+	}
+
+
+	public int secession(Member loginMember) throws Exception {
+
+		Connection con = getConnection();
+		
+		int result = dao.secession(con, loginMember.getMemberId());
+		
+		if(result != 0 ) commit(con);
+		else 			 rollback(con);
+
+		close(con);	
+		
+		return result;
+	}
+
+
 	
 	
 	

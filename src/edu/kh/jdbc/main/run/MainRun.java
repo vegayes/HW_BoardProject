@@ -14,3 +14,4 @@ public class MainRun {
 		new MainView().displayBoard();
 	}
 }
+

@@ -1,6 +1,6 @@
 package edu.kh.jdbc.member.model.dao;
 
-import static edu.kh.jdbc.common.JDBCTemplate.close;
+import static edu.kh.jdbc.common.JDBCTemplate.*;
 
 import java.io.FileInputStream;
 import java.sql.Connection;
@@ -167,10 +167,61 @@ public class MemberDAO {
 			
 		}finally {
 			close(rs);
-			close(con);
+			close(pstmt);
 		}
 		
 		
+		return result;
+	}
+
+	public int updatePw2(Connection con, String memberId, String updatePw)throws Exception {
+		int result = 0;
+		
+		try {
+			
+			String sql = prop.getProperty("updatePw2");
+			
+			pstmt = con.prepareStatement(sql);
+			
+
+			pstmt.setString(1, updatePw);
+			pstmt.setString(2, memberId);
+			
+			
+			result=pstmt.executeUpdate();
+			
+		}finally {
+		
+			close(pstmt);
+			
+		}
+		
+		return result;
+	}
+
+
+
+	public int secession(Connection con, String memberId) throws Exception{
+		
+		int result = 0;
+		
+		String check = "Y";
+		
+		try {
+			
+			String sql= prop.getProperty("secession");
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, check);
+			pstmt.setString(2,memberId);
+			
+			result = pstmt.executeUpdate();
+		}finally {
+			
+			close(pstmt);
+		}
+	
 		return result;
 	}
 
