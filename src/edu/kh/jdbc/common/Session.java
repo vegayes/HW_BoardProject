@@ -13,12 +13,4 @@ public class Session {
 	// loginMember != null -> 로그인 상태 
 	// 로그인의 유무가 필요할때마다 static에 저장된 값을 가져와서 사용함.
 	
-	
-	
-	
-	
-	
-	
-	
-	
 }

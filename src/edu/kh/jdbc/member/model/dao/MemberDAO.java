@@ -76,7 +76,46 @@ public class MemberDAO {
 
 		return mem;
 	}
+	
+	
+	/** 2. 회원 목록 조회 DAO
+	 * @param con
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Member> selectMembers(Connection con) throws Exception{
+		
+		List<Member> members = new ArrayList<Member>();
 
+		try {
+			String sql = prop.getProperty("selectMembers");
+			
+			stmt = con.createStatement();
+			
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				
+				String memId = rs.getString("MEMBER_ID");
+				String memNm = rs.getString("MEMBER_NM");
+				String memGender = rs.getString("MEMBER_GENDER");
+				
+				Member mem = new Member();
+				
+				mem.setMemberId(memId);
+				mem.setMemberNM(memNm);
+				mem.setMemberGender(memGender);
+				
+				members.add(mem);
+			}
+
+		}finally {
+			close(rs);
+			close(stmt);
+		}
+
+		return members;
+	}
 
 
 	/** 3) 회원정보 수정
@@ -113,44 +152,17 @@ public class MemberDAO {
 
 
 
-	public List<Member> selectMembers(Connection con) throws Exception{
-		
-		List<Member> members = new ArrayList<Member>();
-
-		try {
-			String sql = prop.getProperty("selectMembers");
-			
-			stmt = con.createStatement();
-			
-			rs = stmt.executeQuery(sql);
-			
-			while(rs.next()) {
-				
-				String memId = rs.getString("MEMBER_ID");
-				String memNm = rs.getString("MEMBER_NM");
-				String memGender = rs.getString("MEMBER_GENDER");
-				
-				Member mem = new Member();
-				
-				mem.setMemberId(memId);
-				mem.setMemberNM(memNm);
-				mem.setMemberGender(memGender);
-				
-				members.add(mem);
-			}
-			
-			
-			
-		}finally {
-			close(rs);
-			close(stmt);
-		}
-
-		return members;
-	}
 
 
 
+
+	/** 4-1) 비밀번호 맞는지 확인!
+	 * @param con
+	 * @param loginMember
+	 * @param pw
+	 * @return
+	 * @throws Exception
+	 */
 	public int updatePw(Connection con, Member loginMember, String pw) throws Exception{
 		
 		int result = 0;
@@ -174,6 +186,13 @@ public class MemberDAO {
 		return result;
 	}
 
+	/** 4-2) 비밀번호 변경
+	 * @param con
+	 * @param memberId
+	 * @param updatePw
+	 * @return
+	 * @throws Exception
+	 */
 	public int updatePw2(Connection con, String memberId, String updatePw)throws Exception {
 		int result = 0;
 		

@@ -9,11 +9,14 @@ public class Board {
 	private int readCount; // 조회수 
 	private String deleteFl; // 삭제여부 // char (굳이?) 
 	private int memberNo; // 회원번호 
-	
+	private String memberName;		// 회원 이름
+	private int commentCount;		// 댓글 수
 	
 	// 기본 생성자
 	public Board() {}
 	
+
+
 	// 매개변수 생성자
 	public Board(int boardNo, String boardTitle, String boardContent, String createDt, int readCount, String deleteFl,
 			int memberNo) {
@@ -84,6 +87,24 @@ public class Board {
 		this.memberNo = memberNo;
 	}
 
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+	public int getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
+
+
+	
 	
 	@Override
 	public String toString() {
@@ -91,6 +112,9 @@ public class Board {
 				+ ", createDt=" + createDt + ", readCount=" + readCount + ", deleteFl=" + deleteFl + ", memberNo="
 				+ memberNo + "]";
 	}
+
+
+
 
 
 }

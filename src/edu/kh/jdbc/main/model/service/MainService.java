@@ -71,14 +71,24 @@ public class MainService {
 
 
 
+// 선생님 풀이
+	/** 회원가입 서비스
+	 * @param member
+	 * @return
+	 */
+/*	public int signUp(Member member) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int result = dao.signUp(conn, member); // -> INSERT 수행
+		
+		// 트랜잭션 처리
+		if(result > 0) commit(conn);
+		else			rollback(conn);
+		
+		return result;
+	}
+*/
 
-
-
-
-	
-	
-	
-	
-	
 
 }

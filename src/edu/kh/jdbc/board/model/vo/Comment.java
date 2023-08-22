@@ -5,10 +5,15 @@ public class Comment {
 	
 	private int commentNo ; // 댓글 번호
 	private String commentContent; // 댓글 내용
-	private String createDt; // 댓글 작성일  //  DATE (굳이.. 안써도 될 거 같기두.?)
-	private String deleteFl; // 삭제 여부 //  char 굳이?
+	private String createDt; // 댓글 작성일 
+	private String deleteFl; // 삭제 여부?
 	private int memberNo; // 회원번호 
 	private int boardNo; // 게시글 번호
+	
+	
+	
+	
+	
 	
 	private String memberName; // 추가 회원이름
 	

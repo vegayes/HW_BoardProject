@@ -46,16 +46,8 @@ public class CommentDAO {
 		
 		int result = 0;
 		
-		try {
-			System.out.println(comment);
-			System.out.println(index);
-
-			
-			
+		try {		
 			String sql = prop.getProperty("addComment");
-			System.out.println(sql);
-			
-			System.out.println(loginMember.getMemberNo());
 			
 			pstmt = con.prepareStatement(sql);
 			

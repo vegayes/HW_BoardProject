@@ -123,9 +123,37 @@ public class MainDAO {
 		return result;
 	}
 	
+	/**  선생님 :: 아이디 중복 검사 DAO
+	 * @param conn
+	 * @param memberId
+	 * @return
+	 */
+/*	public int idDuplicationCheck(Connection conn, String memberId) throws Exception{
+		
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("idDuplicationCheck");
+			
+			pstmt = conn.prepareStatement(sql);    
+			pstmt.setString(1, memberId);
+			
+			rs = pstmt.executeQuery(); // + Count로 받음.
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+*/	
 	
-	
-	/** 2-2). 회원가입 정보 삽입 DAO
+	/** 2-2) 회원가입 정보 삽입 DAO
 	 * @param con
 	 * @param signId
 	 * @param signPw
@@ -139,7 +167,6 @@ public class MainDAO {
 		int result = 0;
 		
 		try {
-			
 			String sql = prop.getProperty("signUp");
 			
 			pstmt = con.prepareStatement(sql);
@@ -161,8 +188,35 @@ public class MainDAO {
 
 
 
+	/** 선생님 :: 회원 가입 SQL 수행( INSERT )
+	 * @param conn
+	 * @param member
+	 * @return
+	 */
+/*	public int signUp(Connection conn, Member member) throws Exception{
+		
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("signUp");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, member.getMemberId());
+			pstmt.setString(2, member.getMemberPw());
+			pstmt.setString(3, member.getMemberName());
+			pstmt.setString(4, member.getMemberGender());
+			
+			result = pstmt.executeUpdate();
+
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
 	
-	
+*/	
 	
 	
 	
